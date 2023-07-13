@@ -11,7 +11,7 @@ public class DbConnector {
 	public static Connection getConnection() throws Exception {
 		String user ="user01";
 		String password="user01";
-		String url="jdbc:oracle:thin:@15.164.162.212:1521:xe";
+		String url="jdbc:oracle:thin:@13.209.48.210:1521:xe";
 		String driver="oracle.jdbc.driver.OracleDriver";
 		
 		//1. 드라이버를 메모리에 로딩
