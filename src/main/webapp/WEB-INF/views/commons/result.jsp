@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +8,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Index Page</h1>
-	<a href="bankbook/list.do">금융상품몰</a>
-	<a href="/bankbook/list.do">금융</a>
+	<c:if test="${result gt 0}">
+		<h1>성공</h1>
+	</c:if>
+	<c:if test="${result le 0}">
+		<h1>실패</h1>
+	</c:if>
+	
+	<a href="/">Home</a>
 </body>
 </html>

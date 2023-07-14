@@ -40,7 +40,7 @@ public class BankBookDAO {
 	}
 	
 	//상품 N개 조회
-	public ArrayList<BankBookDTO> bankBooklist() throws Exception{
+	public ArrayList<BankBookDTO> bankBookList() throws Exception{
 		ArrayList<BankBookDTO> ar = new ArrayList<BankBookDTO>();
 		
 		//1. DB 연결
