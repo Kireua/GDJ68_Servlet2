@@ -21,4 +21,12 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>student</servlet-name>
+		<servlet-class>com.iu.main.student.StudentController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>student</servlet-name>
+		<url-pattern>/student/*</url-pattern>
+	</servlet-mapping>
 </web-app>
