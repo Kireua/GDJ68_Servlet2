@@ -67,6 +67,7 @@ public class BankBookController extends HttpServlet {
 					bankBookDTO.setBookName(request.getParameter("bookName"));
 					bankBookDTO.setBookRate(Double.parseDouble(request.getParameter("bookRate")));
 					bankBookDTO.setBookSale(Integer.parseInt(request.getParameter("bookSale")));
+					bankBookDTO.setBookContents(request.getParameter("bookContents"));
 					
 					int result=bankBookDAO.bankBookAdd(bankBookDTO);
 					request.setAttribute("result", result);
@@ -78,7 +79,30 @@ public class BankBookController extends HttpServlet {
 				
 			}else if(path.equals("/update.do")) {
 				System.out.println("상품 수정");
-				viewName = "/WEB-INF/views/bankbook/update.jsp";
+				
+				String method = request.getMethod();
+				if(method.equals("POST")) {
+					BankBookDTO bankBookDTO = new BankBookDTO();
+					bankBookDTO.setBookName(request.getParameter("bookName"));
+					bankBookDTO.setBookContents(request.getParameter("bookContents"));
+					bankBookDTO.setBookRate(Double.parseDouble(request.getParameter("bookRate")));
+					bankBookDTO.setBookSale(Integer.parseInt(request.getParameter("bookSale")));
+					bankBookDTO.setBookNum(Long.parseLong(request.getParameter("bookNum")));
+					int result = bankBookDAO.bankBookUpdate(bankBookDTO);
+					
+					request.setAttribute("result", result);
+					viewName="/WEB-INF/views/commons/result.jsp";
+					
+				}else {
+				
+					String bookNum = request.getParameter("bookNum");
+					BankBookDTO bankBookDTO = new BankBookDTO();
+					bankBookDTO.setBookNum(Long.parseLong(bookNum));
+					bankBookDTO=bankBookDAO.bankBookDetail(bankBookDTO);
+					request.setAttribute("dto", bankBookDTO);
+					viewName = "/WEB-INF/views/bankbook/update.jsp";
+				}
+				
 			}else if(path.equals("/delete.do")) {
 				System.out.println("상품 삭제");
 				viewName = "/WEB-INF/views/bankbook/delete.jsp";

@@ -8,7 +8,14 @@ public class BankBookDTO {
 	private String bookName;
 	private double bookRate;
 	private int bookSale;
+	private String bookContents;
 	
+	public String getBookContents() {
+		return bookContents;
+	}
+	public void setBookContents(String bookContents) {
+		this.bookContents = bookContents;
+	}
 	public long getBookNum() {
 		return bookNum;
 	}
