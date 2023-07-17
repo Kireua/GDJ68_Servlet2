@@ -17,7 +17,7 @@
 		<tbody>
 			<c:forEach items="${studentList}" var="s" varStatus="i">
 				<tr>
-					<td><a href="./list.do?studNum=${s.studNum}">${s.name}</a></td>
+					<td><a href="./detail.do?studNum=${s.studNum}">${s.name}</a></td>
 					<td>${s.total} ${i.index}</td>
 					<td>${s.avg}</td>
 				</tr>
@@ -25,5 +25,7 @@
 			
 		</tbody>
 	</table>
+	
+	<a href="./add.do">학생 등록</a>
 </body>
 </html>

@@ -81,7 +81,7 @@ public class StudentDAO {
 		}else {
 			studentDTO=null;
 		}
-		
+		DbConnector.disConnect(rs, st,con);
 		return studentDTO;
 	}
 	
@@ -99,6 +99,29 @@ public class StudentDAO {
 		
 		System.out.println("Db Delete");
 		
+		DbConnector.disConnect(st, con);
 		return result;
+	}
+	
+	public int studentUpdate(StudentDTO studentDTO) throws Exception{
+		int result = 0;
+		
+		Connection con = DbConnector.getConnection();
+		
+		String sql="UPDATE STUDENT SET NAME=?, KOREAN=?, ENGLISH=?, MATH=? WHERE STUDNUM=?";
+		
+		PreparedStatement st = con.prepareStatement(sql);
+		
+		st.setString(1, studentDTO.getName());
+		st.setInt(2, studentDTO.getKorean());
+		st.setInt(3, studentDTO.getEnglish());
+		st.setInt(4, studentDTO.getMath());
+		st.setLong(5, studentDTO.getStudNum());
+		
+		result = st.executeUpdate();
+		
+		DbConnector.disConnect(st, con);
+		return result;
+		
 	}
 }

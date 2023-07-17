@@ -34,6 +34,7 @@ public class StudentController extends HttpServlet {
 		try {
 			String path = request.getPathInfo();
 			String url = "/WEB-INF/views/errors/notFound.jsp";
+			boolean flag = true;
 			
 			if(path.equals("/list.do")) {
 				ArrayList<StudentDTO> ar = studentDAO.studentList();
@@ -49,11 +50,64 @@ public class StudentController extends HttpServlet {
 				
 				url = "/WEB-INF/views/student/detail.jsp";
 			}else if(path.equals("/add.do")) {
-				url = "/WEB-INF/views/student/add.jsp";
+				
+				String method = request.getMethod();
+				if(method.equals("POST")) {
+					StudentDTO studentDTO = new StudentDTO();
+					studentDTO.setName(request.getParameter("name"));
+					studentDTO.setKorean(Integer.parseInt(request.getParameter("korean")));
+					studentDTO.setEnglish(Integer.parseInt(request.getParameter("english")));
+					studentDTO.setMath(Integer.parseInt(request.getParameter("math")));
+					studentDTO.cal();
+					int result = studentDAO.studentAdd(studentDTO);
+					request.setAttribute("result", result);
+					url="./list.do";
+				}else {
+					
+					url = "/WEB-INF/views/student/add.jsp";
+				}
+				
+			}else if(path.equals("/update.do")) {
+				String method = request.getMethod();
+				
+				if(method.equals("POST")) {
+					StudentDTO studentDTO = new StudentDTO();
+					studentDTO.setName(request.getParameter("name"));
+					studentDTO.setKorean(Integer.parseInt(request.getParameter("korean")));
+					studentDTO.setEnglish(Integer.parseInt(request.getParameter("english")));
+					studentDTO.setMath(Integer.parseInt(request.getParameter("math")));
+					studentDTO.setStudNum(Long.parseLong(request.getParameter("studNum")));
+					studentDTO.cal();
+					int result = studentDAO.studentUpdate(studentDTO);
+					
+					request.setAttribute("result", result);
+					flag=false;
+					url="./detail.do?studNum="+studentDTO.getStudNum();
+				}else {
+					String studNum = request.getParameter("studNum");
+					StudentDTO studentDTO = new StudentDTO();
+					studentDTO.setStudNum(Long.parseLong(studNum));
+					studentDTO = studentDAO.studentDetail(studentDTO);
+					request.setAttribute("dto", studentDTO);
+					url= "/WEB-INF/views/student/update.jsp";
+				}
+			}else if(path.equals("/delete.do")) {
+				StudentDTO studentDTO = new StudentDTO();
+				studentDTO.setStudNum(Long.parseLong(request.getParameter("studNum")));
+				int result = studentDAO.studentDelete(studentDTO);
+				
+				request.setAttribute("result", result);
+				url="/WEB-INF/views/commons/result.jsp";
 			}
 			
+			if(flag) {
 			RequestDispatcher view = request.getRequestDispatcher(url);
 			view.forward(request, response);
+			}else {
+				response.sendRedirect(url);
+			}
+				
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

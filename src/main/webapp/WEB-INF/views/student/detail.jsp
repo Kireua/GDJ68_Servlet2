@@ -13,8 +13,13 @@
 	<%StudentDTO studentDTO = (StudentDTO)request.getAttribute("dto"); %>
 	
 	<h3><%= studentDTO.getName() %></h3>
-	<h1>${requestScope.dto.bookName}</h1>
-	<h1>${dto.bookRate}</h1>
+	<h1>${requestScope.dto.name}</h1>
+	<h1>${dto.total}</h1>
+	<h1>${dto.avg}</h1>
+	
+	<a href="./update.do?studNum=${dto.studNum }">수정</a>
+	<a href="./delete.do?studNum=${dto.studNum }">삭제</a>
+	
 	
 </body>
 </html>
