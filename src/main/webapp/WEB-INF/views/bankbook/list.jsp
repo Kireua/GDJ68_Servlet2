@@ -29,8 +29,8 @@
 	
 	<a href="./add.do">상품등록</a>
 	
-	<c:forEach begin="1" step="2" end="10" var="num">
+<%-- 	<c:forEach begin="1" step="2" end="10" var="num">
 		<h1>${num}</h1>
-	</c:forEach>
+	</c:forEach> --%>
 </body>
 </html>

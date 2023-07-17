@@ -44,6 +44,7 @@ public class BankBookController extends HttpServlet {
 			
 			String path = request.getPathInfo();
 			String viewName = "/WEB-INF/views/errors/notFound.jsp";
+			boolean flag = true;
 			
 			if(path.equals("/list.do")) {
 				System.out.println("상품 목록");
@@ -70,8 +71,9 @@ public class BankBookController extends HttpServlet {
 					bankBookDTO.setBookContents(request.getParameter("bookContents"));
 					
 					int result=bankBookDAO.bankBookAdd(bankBookDTO);
-					request.setAttribute("result", result);
-					viewName="/WEB-INF/views/commons/result.jsp";
+					//request.setAttribute("result", result);
+					flag =false;
+					viewName="./list.do";
 				}else {
 					viewName = "/WEB-INF/views/bankbook/add.jsp";
 					
@@ -91,7 +93,8 @@ public class BankBookController extends HttpServlet {
 					int result = bankBookDAO.bankBookUpdate(bankBookDTO);
 					
 					request.setAttribute("result", result);
-					viewName="/WEB-INF/views/commons/result.jsp";
+					flag=false;
+					viewName="./detail.do?bookNum="+bankBookDTO.getBookNum();
 					
 				}else {
 				
@@ -104,13 +107,25 @@ public class BankBookController extends HttpServlet {
 				}
 				
 			}else if(path.equals("/delete.do")) {
+				BankBookDTO bankBookDTO = new BankBookDTO();
+				bankBookDTO.setBookNum(Long.parseLong(request.getParameter("bookNum")));
+				int result = bankBookDAO.bankBookDelete(bankBookDTO);
 				System.out.println("상품 삭제");
-				viewName = "/WEB-INF/views/bankbook/delete.jsp";
+				
+				request.setAttribute("result", result);
+				viewName="/WEB-INF/views/commons/result.jsp";
+				
+				
 			}
 			
-			RequestDispatcher view = request.getRequestDispatcher(viewName);
-			view.forward(request, response);
-		
+			if(flag) {
+			//forward 방식
+				RequestDispatcher view = request.getRequestDispatcher(viewName);
+				view.forward(request, response);
+			}else {
+				//redirect
+				response.sendRedirect(viewName);
+			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
