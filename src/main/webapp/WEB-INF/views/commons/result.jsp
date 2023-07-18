@@ -15,6 +15,6 @@
 		<h1>실패</h1>
 	</c:if>
 	
-	<a href="/">Home</a>
+	<a href="/bankbook/list.do">Home</a>
 </body>
 </html>

@@ -1,22 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<c:import url="../temp/bootStrap.jsp"></c:import>
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>add</h1>
+	<c:import url="../temp/header.jsp"></c:import>
+	<h1 class="mb-5 text-center">add</h1>
 	
-	<form action="./add.do" method="post">
-		상품명<input type="text" name="bookName"><br>
-		상세설명<textarea rows="" cols="" name="bookContents"></textarea>
-		이자율<input type="text" name="bookRate"><br>
+	<form class="mb-5 text-center form-control" action="./add.do" method="post">
+		<div class="input-group text-center"><span class="input-group-text" id="basic-addon2">상품명</span><input  type="text" name="bookName"></div><br>
+		<div class="input-group text-center"><span class="input-group-text" id="basic-addon2">상세설명</span><textarea class="input-group" rows="" cols="" name="bookContents"></textarea></div><br>
+		<div class="input-group text-center"><span class="input-group-text" id="basic-addon2"> 이자율</span><input  type="text" name="bookRate"></div><br>
 		
 		<p>
-			판매가능<input type="radio" name="bookSale" checked value="1"><br>
-			판매중지<input type="radio" name="bookSale" value="0"><br>
+			<div class="input-group text-center me-5"><span class="input-group-text" id="basic-addon2">판매가능</span><input class="ms-4 " type="radio" name="bookSale" checked value="1"></div><br>
+			<div class="input-group text-center me-5"><span class="input-group-text" id="basic-addon2">판매가능</span><input class=" ms-4 " type="radio" name="bookSale" value="0"></div><br>
 		</p>
 		
 		
@@ -32,5 +35,7 @@
 		<input type="reset" value="add">
 		<input type="button" value="add">
 	</form>
+
+
 </body>
 </html>

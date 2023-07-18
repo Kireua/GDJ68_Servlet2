@@ -1,22 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style type="text/css">
-	h1,h3 {
-		color:red;
-	}
-</style>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<c:import url="./temp/bootStrap.jsp"></c:import>
+	
+
 </head>
 <body>
-	<h1>Index Page</h1>
-	<a href="bankbook/list.do">금융상품몰</a>
-	<a href="/bankbook/list.do">금융</a>
-	<h1>Contents</h1>
-	<h3>Contents2</h3>
-	<h3>Contents3</h3>
+	<c:import url="./temp/header.jsp"></c:import>
+	
+	
+
 </body>
 </html>
