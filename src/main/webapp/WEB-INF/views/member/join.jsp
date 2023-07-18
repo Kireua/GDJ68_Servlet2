@@ -11,18 +11,43 @@
 </head>
 <body>
 	<c:import url="../temp/header.jsp"></c:import>
-	<h1>회원가입 페이지</h1>
-	<section>
-	<form class="mb-5 text-center form-control" action="./join.do" method="post">
-		<div class="input-group text-center"><label for="id" class="input-group-text" id="basic-addon2">ID　　</label><input type="text" id="id" name="id" placeholder="ID를 입력하세요." ></div><br>
-		<div class="input-group text-center"><label for="pw" class="input-group-text" id="basic-addon2">PW　　</label><input type="password" id="pw" name="pw" ></div><br>
-		<div class="input-group text-center"><label for="name" class="input-group-text" id="basic-addon2">이름　　</label><input type="text" id="name" name="name" placeholder="이름을 입력하세요."></div><br>
-		<div class="input-group text-center"><label for="email" class="input-group-text" id="basic-addon2">EMAIL</label><input type="email" id="email" name="email" placeholder="example@example.com"></div><br>
-		<div class="input-group text-center"><label for="birth" class="input-group-text" id="basic-addon2">생년월일</label><input type="date" id="birth" name="birth" ></div><br>
-		
-			<button type="submit" class="btn btn-outline-secondary">회원가입</button>
-		
+
+<section class="container mt-5">	
+	<h1 class="my-4">회원가입 페이지</h1>
+	
+	<form action="./join.do" method="post">
+	<div class="mb-3">
+	  <label for="id" class="form-label">ID</label>
+	  <input type="text" name="id" class="form-control" id="id" placeholder="ID를 입력하세요">
+	</div>
+	
+	<div class="mb-3">
+	  <label for="pw" class="form-label">PASSWORD</label>
+	  <input type="password" name="pw" class="form-control" id="pw" placeholder="PW를 입력하세요">
+	</div>
+	
+	<div class="mb-3">
+	  <label for="name" class="form-label">Name</label>
+	  <input type="text" name="name" class="form-control" id="name" placeholder="Name을 입력하세요">
+	</div>
+	
+	<div class="mb-3">
+	  <label for="email" class="form-label">Email</label>
+	  <input type="email" name="email" class="form-control" id="email" placeholder="Email를 입력하세요">
+	</div>
+	
+	<div class="mb-3">
+	  <label for="birth" class="form-label">Birth</label>
+	  <input type="date" name="birth" class="form-control" id="birth" placeholder="PW를 입력하세요">
+	</div>
+	
+	<div class="mb-3">
+		<button class="btn btn-primary">회원가입</button>
+	</div>
+	
 	</form>
-	</section>
+	
+	
+</section>
 </body>
 </html>
