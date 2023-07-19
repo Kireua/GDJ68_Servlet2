@@ -2,7 +2,9 @@ package com.iu.main.member;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
+import com.iu.main.bankBook.BankBookDTO;
 import com.iu.main.utill.DbConnector;
 
 public class MemberDAO {
@@ -29,5 +31,33 @@ public class MemberDAO {
 		DbConnector.disConnect(st, con);
 		return result;
 	}
+	
+	public MemberDTO login(MemberDTO memberDTO) throws Exception {
+		Connection con = DbConnector.getConnection();
+		
+		String sql= "SELECT ID,NAME FROM MEMBER WHERE ID = ? AND PW = ?";
+	
+		PreparedStatement st = con.prepareStatement(sql);
+		
+
+		st.setString(1, memberDTO.getId());
+		st.setString(2, memberDTO.getPw());
+		
+		ResultSet rs = st.executeQuery();
+		
+		
+		//한 줄 읽기
+		if(rs.next()) {
+			memberDTO = new MemberDTO();
+			memberDTO.setId(rs.getString("ID"));
+			memberDTO.setName(rs.getString("NAME"));	
+		}else {
+			memberDTO=null;
+		}
+		
+		DbConnector.disConnect(rs, st, con);
+		
+		return memberDTO;
+	} 
 
 }

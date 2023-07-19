@@ -12,8 +12,15 @@
 </head>
 <body>
 	<c:import url="./temp/header.jsp"></c:import>
+	<img src="/resources/images/1674425045-kr.jpg">
+	<img src="/resources/images/ss.jpeg">
 	
-	
+	<c:if test="${not empty sessionScope.member}">
+		<h1>로그인 상태</h1>	
+	</c:if>
+	<c:if test="${empty sessionScope.member }">
+		<h1>비로그인 상태</h1>
+	</c:if>
 
 </body>
 </html>

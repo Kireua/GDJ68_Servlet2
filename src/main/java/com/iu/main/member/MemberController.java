@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class MemberController
@@ -57,6 +58,43 @@ public class MemberController extends HttpServlet {
 					url = "/WEB-INF/views/member/join.jsp";
 					
 				}
+			}else if(path.equals("/login.do")) {
+				if(method.equals("POST")) {
+					MemberDTO memberDTO = new MemberDTO();
+					memberDTO.setId(request.getParameter("id"));
+					memberDTO.setPw(request.getParameter("pw"));
+					
+					memberDTO = memberDAO.login(memberDTO);
+					if(memberDTO != null) {
+						System.out.println("로그인 성공");
+						HttpSession session = request.getSession();
+						session.setAttribute("member", memberDTO);
+					}else {
+						System.out.println("로그인 실패");
+						
+					}
+					flag=!flag;
+					url = "../index.do";
+				
+					
+				}else {
+					url= "/WEB-INF/views/member/login.jsp";
+				}
+			}else if(path.equals("/logout.do")) {
+				HttpSession session = request.getSession();
+				//첫번째 방법 MemberDTO 값을 null
+//				session.setAttribute("member", null);
+				
+				//두번째 방법 Member 키와 MemberDTO 삭제
+//				session.removeValue("member");
+				
+				//세번째 방법 session 객체 소멸 시간을 0으로 만드는 메서드 
+				session.invalidate();
+				
+				flag=false;
+				url = "../index.do";			
+			}else if(path.equals("/mypage.do")) {
+				url = "/WEB-INF/views/member/mypage.jsp";
 			}
 			
 			//URL 구분 끝

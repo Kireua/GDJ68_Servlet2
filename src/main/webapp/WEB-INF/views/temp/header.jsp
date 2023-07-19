@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
 		<nav class="navbar bg-dark navbar-expand-lg border-bottom border-bottom-dark"  data-bs-theme="dark">
 				 <div class="container-fluid">
@@ -31,10 +32,18 @@
 		        </li>
 		      </ul>
 		      <nav>
-		      	<ul class="navbar-nav me-auto mb-2 mb-lg-0" >
-			      	<li class="nav-item me-3 text-white nav-link active">로그인</li>
-			      	<li class="nav-item me-3 text-white"><a class="nav-link active" aria-current="page" href="/member/join.do">회원가입</a></li>
-		      	</ul>
+		      	<c:if test="${not empty sessionScope.member}">
+			      	<ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+				      	<li class="nav-item me-3 text-white"><a class="nav-link active" aria-current="page" href="/member/logout.do">로그아웃</a></li>
+				      	<li class="nav-item me-3 text-white"><a class="nav-link active" aria-current="page" href="/member/mypage.do">마이페이지</a></li>
+			      	</ul>
+			     </c:if>
+			     	<c:if test="${empty sessionScope.member}">
+			      	<ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+				      	<li class="nav-item me-3 text-white"><a class="nav-link active" aria-current="page" href="/member/login.do">로그인</a></li>
+				      	<li class="nav-item me-3 text-white"><a class="nav-link active" aria-current="page" href="/member/join.do">회원가입</a></li>
+			      	</ul>
+			     </c:if>
 		      </nav>
 		      <!-- <form class="d-flex" role="search">
 		        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
